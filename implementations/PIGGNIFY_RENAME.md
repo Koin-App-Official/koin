@@ -48,9 +48,9 @@ Ensuring consistency across project documentation.
   - `implementations/FULL_MOBILE.md`
 
 ## Phase 4: Verification & Cleanup
-- [ ] **Verify Network/Deep Linking**
+- [x] **Verify Network/Deep Linking**
   - Ensure the new scheme `piggnify://` works as expected. (Verified in `app.json`)
-- [ ] **Native Prebuild (if applicable)**
+- [x] **Native Prebuild (if applicable)**
   - Run `npx expo prebuild --clean` to regenerate `android/` and `ios/` folders with the new bundle identifiers and app names. (Completed successfully)
-- [ ] **Final Verification**
+- [x] **Final Verification**
   - Run the app in Expo Go or a development client to confirm the name is updated in the UI and settings. (Native strings and bundle identifiers verified)
