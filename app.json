@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Koin",
-    "slug": "koin-mobile",
-    "scheme": "koin",
+    "name": "Piggify",
+    "slug": "piggify-mobile",
+    "scheme": "piggify",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.koin.app"
+      "bundleIdentifier": "com.piggify.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +24,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.koin.app"
+      "package": "com.piggify.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,8 +34,8 @@
       [
         "@sentry/react-native/expo",
         {
-          "organization": "koin-gz",
-          "project": "koin"
+          "organization": "piggify-gz",
+          "project": "piggify"
         }
       ],
       "@sentry/react-native",
