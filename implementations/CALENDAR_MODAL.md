@@ -11,12 +11,12 @@ This document outlines the detailed steps to implement a premium calendar modal 
 - [x] Install `react-native-calendars` dependency.
 
 ### Phase 2: Core Component Development
-- [ ] Finalize `src/components/ui/calendar-modal.tsx`.
-    - [ ] Implement `Modal` wrapper with `AnimatePresence`.
-    - [ ] Add `moti` slide-up and fade-in animations.
-    - [ ] Configure `react-native-calendars` with premium theme colors.
-    - [ ] Implement "Confirm" and "Cancel" buttons using custom `Button` component.
-    - [ ] Add backdrop dismissal logic.
+- [x] Finalize `src/components/ui/calendar-modal.tsx`.
+    - [x] Implement `Modal` wrapper with `AnimatePresence`.
+    - [x] Add `moti` slide-up and fade-in animations.
+    - [x] Configure `react-native-calendars` with premium theme colors.
+    - [x] Implement "Confirm" and "Cancel" buttons using custom `Button` component.
+    - [x] Add backdrop dismissal logic.
 
 ### Phase 3: Integration into Onboarding Flow
 - [ ] Update `app/onboarding.tsx` imports.
