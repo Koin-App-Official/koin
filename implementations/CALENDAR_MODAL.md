@@ -19,12 +19,12 @@ This document outlines the detailed steps to implement a premium calendar modal 
     - [x] Add backdrop dismissal logic.
 
 ### Phase 3: Integration into Onboarding Flow
-- [ ] Update `app/onboarding.tsx` imports.
-- [ ] Add `isCalendarVisible` state to `Onboarding` component.
-- [ ] Replace text input with `TouchableOpacity` trigger button.
-    - [ ] Style trigger to match `Input` aesthetic but with interactive feel.
-    - [ ] Add `Calendar` icon to the trigger button.
-- [ ] Mount `CalendarModal` and link to state.
+- [x] Update `app/onboarding.tsx` imports.
+- [x] Add `isCalendarVisible` state to `Onboarding` component.
+- [x] Replace text input with `TouchableOpacity` trigger button.
+    - [x] Style trigger to match `Input` aesthetic but with interactive feel.
+    - [x] Add `Calendar` icon to the trigger button.
+- [x] Mount `CalendarModal` and link to state.
 
 ### Phase 4: Visual Polish & UX
 - [ ] Audit contrast ratios for the calendar UI.
