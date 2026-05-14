@@ -27,10 +27,10 @@ This document outlines the detailed steps to implement a premium calendar modal 
 - [x] Mount `CalendarModal` and link to state.
 
 ### Phase 4: Visual Polish & UX
-- [ ] Audit contrast ratios for the calendar UI.
-- [ ] Ensure smooth haptic-like feedback or transitions on date selection.
-- [ ] Verify responsiveness on small and large mobile screens.
-- [ ] Ensure the default date (template-based) is correctly pre-selected in the calendar.
+- [x] Audit contrast ratios for the calendar UI.
+- [x] Ensure smooth haptic-like feedback or transitions on date selection.
+- [x] Verify responsiveness on small and large mobile screens.
+- [x] Ensure the default date (template-based) is correctly pre-selected in the calendar.
 
 ### Phase 5: Verification & Completion
 - [ ] Verify date format consistency (YYYY-MM-DD).

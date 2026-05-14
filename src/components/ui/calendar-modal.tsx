@@ -4,7 +4,8 @@ import { Calendar } from 'react-native-calendars';
 import { MotiView, AnimatePresence } from 'moti';
 import { Button } from './button';
 import { X } from 'lucide-react-native';
-import { cn } from '../../lib/utils';
+import * as Haptics from 'expo-haptics';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface CalendarModalProps {
   isVisible: boolean;
@@ -15,6 +16,7 @@ interface CalendarModalProps {
 
 export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: CalendarModalProps) => {
   const [selectedDate, setSelectedDate] = useState(initialDate || new Date().toISOString().split('T')[0]);
+  const insets = useSafeAreaInsets();
 
   // Sync selectedDate with initialDate when modal becomes visible
   useEffect(() => {
@@ -25,6 +27,17 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
 
   const handleDayPress = (day: any) => {
     setSelectedDate(day.dateString);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
+
+  const handleConfirm = () => {
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    onConfirm(selectedDate);
+  };
+
+  const handleClose = () => {
+    Haptics.selectionAsync();
+    onClose();
   };
 
   return (
@@ -32,7 +45,7 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
       transparent
       visible={isVisible}
       animationType="none"
-      onRequestClose={onClose}
+      onRequestClose={handleClose}
     >
       <View style={styles.overlay}>
         <AnimatePresence>
@@ -45,7 +58,7 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
                 transition={{ type: 'timing', duration: 200 }}
                 style={StyleSheet.absoluteFill}
               >
-                <Pressable style={styles.backdrop} onPress={onClose} />
+                <Pressable style={styles.backdrop} onPress={handleClose} />
               </MotiView>
               
               <MotiView
@@ -58,7 +71,10 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
                   stiffness: 250,
                   mass: 0.8
                 }}
-                style={styles.content}
+                style={[
+                  styles.content,
+                  { paddingBottom: Math.max(insets.bottom, 20) }
+                ]}
               >
                 <View className="p-5 border-b border-outline-variant flex-row justify-between items-center bg-surface">
                   <View>
@@ -66,8 +82,8 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
                     <Text className="text-sm text-on-surface-variant">When do you want to reach your goal?</Text>
                   </View>
                   <Pressable 
-                    onPress={onClose} 
-                    className="h-10 w-10 items-center justify-center rounded-full bg-surface-container-high"
+                    onPress={handleClose} 
+                    className="h-10 w-10 items-center justify-center rounded-full bg-surface-container-high active:bg-surface-container-highest"
                   >
                     <X size={20} color="#475569" />
                   </Pressable>
@@ -77,6 +93,7 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
                   <Calendar
                     current={selectedDate}
                     onDayPress={handleDayPress}
+                    enableSwipeMonths={true}
                     markedDates={{
                       [selectedDate]: { 
                         selected: true, 
@@ -87,12 +104,12 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
                     }}
                     theme={{
                       calendarBackground: 'transparent',
-                      textSectionTitleColor: '#94a3b8',
+                      textSectionTitleColor: '#475569', // Darkened for better contrast (Slate 600)
                       selectedDayBackgroundColor: '#1D47D7',
                       selectedDayTextColor: '#FFFFFF',
                       todayTextColor: '#1D47D7',
                       dayTextColor: '#1e293b',
-                      textDisabledColor: '#cbd5e1',
+                      textDisabledColor: '#94a3b8', // Darkened for better contrast (Slate 400)
                       arrowColor: '#1D47D7',
                       monthTextColor: '#0f172a',
                       indicatorColor: '#1D47D7',
@@ -123,13 +140,13 @@ export const CalendarModal = ({ isVisible, onClose, onConfirm, initialDate }: Ca
                     variant="outline" 
                     className="flex-1 h-14" 
                     label="Cancel" 
-                    onPress={onClose} 
+                    onPress={handleClose} 
                   />
                   <Button 
                     variant="default" 
                     className="flex-1 h-14" 
                     label="Confirm" 
-                    onPress={() => onConfirm(selectedDate)} 
+                    onPress={handleConfirm} 
                   />
                 </View>
               </MotiView>
@@ -148,17 +165,17 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // Slightly lighter backdrop for more "premium" feel
   },
   content: {
     backgroundColor: '#ffffff',
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
-    paddingBottom: 40, 
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -10 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.1,
     shadowRadius: 20,
     elevation: 25,
   },
 });
+
